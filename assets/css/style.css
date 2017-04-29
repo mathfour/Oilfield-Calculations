@@ -1,3 +1,18 @@
+/*** WEBPAGE COLORS **
+    blue: #0005DE
+    red: #DE0000
+    grey: #8D8D8D
+    White
+***********************/
+textarea, input {
+    /*background: transparent;*/
+    opacity: 0.75;
+}
+
+.btn-danger {
+    background-color: #DE0000;
+}
+
 /*********** OTHER **********/
 
 html, body {
@@ -8,16 +23,18 @@ html, body {
 }
 
 
-.background-image {
-    height: 100%;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-}
-
 img {
     width: 50px;
     height: 50px;
+}
+
+/* bmc: for the weather thing in the sidebar */
+/* bmc: the percentages allow the image to scale with screen changes */
+#satellite2 {
+    /*width: 180px;*/
+    /*height: 200px;*/
+    width: 95%;
+    height: 95%;
 }
 
 h3 {
@@ -29,12 +46,13 @@ ul {
     line-height: 30px;
 }
 
+/* bmc: to show the result lines not all squished up */
 .result {
-    line-height:2em;
+    line-height: 1.3em;
 }
 
 #outputs {
-    width:50%;
+    width:65%;
 }
 
 /* bmc: need this at 100% to make the gray sidebars go all the way to the bottom */
@@ -42,9 +60,80 @@ ul {
     height:100%;
 }
 
+/* bmc: to give the heading "Saved Calulations" some headroom */
+#tableAreaHeading {
+    margin-top: 24px;
+}
+
+/* bmc: for the social media icons, but I think these are no longer needed */
+.icon {
+    height: 40px;
+    width: 40px;
+    float: left;
+    margin:5px 5px 5px 5px;
+}
+
+
+thead {
+    font-weight:bold;
+    font-size:1.3em;
+}
+
+/********** CONNECT LINKS **********/
+
+#connect {
+    font-size: 24px;
+    font-weight: bold;
+    /* bmc: changed from font-style to font-weight, the correct attribute*/
+}
+
+
 /********** NAVITGATION **********/
 .navbtn {
     background-color: #0005DE;
+    font-family: 'Bitter', serif;
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+.navbar-inverse .navbar-nav>li>a:focus, .navbar-inverse .navbar-nav>li>a:hover {
+    color: #DE0000;
+    background-color: #9d9d9d;
+}
+
+.TomagochaBlack {
+    font-family: 'Bitter', serif;
+    color: black;
+    font-weight: bold;
+}
+
+.TomagochaWhite {
+    font-family: 'Bitter', serif;
+    color: white;
+    font-weight: bold;
+}
+
+.TomagochaSilver {
+    font-family: 'Bitter', serif;
+    color: #9d9d9d;
+    font-weight: bold;
+}
+
+.TomagochaRed {
+    font-family: 'Bitter', serif;
+    color: #DE0000;
+    font-weight: bold;
+}
+
+.TomagochaBlue {
+    font-family: 'Bitter', serif;
+    color: #0005DE;
+    font-weight: bold;
+}
+
+a:focus, a:hover {
+    text-decoration: none;
+    color: #DE0000;
 }
 
 
@@ -139,18 +228,19 @@ footer {
     }
 }
 
-/********** CONNECT LINKS **********/
 
-#connect {
-    font-size: 24px;
-    font-weight: bold;
-    /* bmc: changed from font-style to font-weight, the correct attribute*/
-}
 
 
 /********************************************
                 PAGE: ABOUT
 ********************************************/
+/* bmc: the .background image class is also used on the home page */
+.background-image {
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
 
 .profile-photo {
     display: block;
@@ -168,24 +258,28 @@ footer {
 }
 
 .about-tomagocha {
-    font-size: 2em;
+    font-size: 1.75em;
     font-weight: bold;
 }
 
 .font-color {
-    font-size: 1.5em;
+    font-size: 1.75em;
+    font-weight: bold;
     color: #F3F3F3;
     margin: 2em 4em 2em 4em;
 }
 
+/* bmc: this is for the social media stuff on the bio page, I think */
 #twitterLink {
     font-size: 1.5em;
     color: white;
     margin: 2em 4em 2em 4em;
+    font-weight: bold;
 }
 
 #tomagocha-twitter-link {
     color: red;
+    font-weight: bold;
 }
 
 #aboutpg-footer-border {
@@ -230,3 +324,42 @@ footer {
     text-decoration: none;
     cursor: pointer;
 }
+
+
+/**************************************************
+                     PAGE: BIO
+**************************************************/
+     .bioRow {
+        width: 1280px;
+        height: 1000px;
+    }
+
+/*** Team Member Bio Paragraph ***/
+    .fontColor {
+        color: white;
+        font-size: 18px;
+        margin: 10px 10px 10px 10px;
+         
+     }
+
+     .nameColor {
+        font-family: 'Bitter', serif;
+        font-size: 25px;
+        font-weight: bold;
+        color: white;
+        text-shadow: .15em .10em black;
+        margin-top: 1em;
+     }
+/* bmc: commented out width because there was no value */
+     .teamBio {
+        /*width:*/
+        margin: 1.75em 1.75em 1.75em 1.75em;
+     }
+
+/*** Changed class name from .placeholderMargin to bioPhoto ***/
+    .bioPhoto {
+        margin: 2.25em 0 1em 0;
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+    }

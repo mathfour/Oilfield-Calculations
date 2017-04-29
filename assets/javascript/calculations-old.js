@@ -2,7 +2,6 @@
  * Created by SilverDash on 4/22/17.
  */
 
-
 // bmc: We start with this at null because we'll need it to abort the ajax call if the user clicks elsewhere
 var bonsAjaxCall = null;
 
@@ -37,34 +36,10 @@ function calculateInnerCapacity() {
             feetPerGallon = response[0].feetPerGallon;
 
             $("#outputs").html("<br><h3 class='result'>The Inner Capacity is <br>" +
-                    barrelsPerFoot + " bbl/ft, or " +
-                    feetPerBarrel + " ft/bbl, or<br>" +
-                    gallonsPerFoot + " gal/ft, or " +
+                    barrelsPerFoot + " bbl/ft, <br>" +
+                    feetPerBarrel + " ft/bbl, <br>" +
+                    gallonsPerFoot + " gal/ft, <br>" +
                     feetPerGallon + " ft/gal</h3>");
-
-            // bmc: reference just this user and his IC data
-            var thisUserIC = thisUserDatabase.child("IC");
-            console.log("the IC part for this user is : " + thisUserIC);
-
-            // bmc: create a set of data in firebase from the information inputs and outputs
-            thisUserIC.push({
-                innerDiam: diameter + " inches",
-                barrelsPerFoot: barrelsPerFoot + " bbl/ft",
-                feetPerBarrel: feetPerBarrel + " ft/bbl",
-                gallonsPerFoot: gallonsPerFoot + " gal/ft",
-                feetPerGallon: feetPerGallon + " ft/gal"
-            });
-
-            // // bmc: put the information in the list of saved calculations
-
-            $("#savedCalcs > tbody").append(
-                    "<tr><td>" + diameter + " inches" +
-                    "</td><td>" + barrelsPerFoot + " bbl/ft" +
-                    "</td><td>" + feetPerBarrel + " ft/bbl" +
-                    "</td><td>" + gallonsPerFoot + " gal/ft" +
-                    "</td><td>" + feetPerGallon + " ft/gal" +
-                    "</td></tr>");
-            $("body").css("cursor", "default");
         });
     });
 
@@ -73,6 +48,7 @@ function calculateInnerCapacity() {
 function calculateAnnularCapacity () {
     var outsideDiameter = $("#outsideDiameter").val();
     var insideDiameter = $("#insideDiameter").val();
+    var holeDepth = $("#holeDepth").val();
 
     var sheetName = "annCap"; // bmc: to send inputs
     var formulaName = "annularCapacity"; // bmc: to receive outputs
@@ -86,7 +62,8 @@ function calculateAnnularCapacity () {
             method: "PATCH",
             data: {
                 "inputOne": outsideDiameter,
-                "inputTwo" : insideDiameter
+                "inputTwo" : insideDiameter,
+                "inputThree" : holeDepth
                 // bmc: passing inputs to the front sheet that will then be referenced in the correct calculation sheet
             }
         }).done(function(response) {
@@ -102,37 +79,11 @@ function calculateAnnularCapacity () {
 
                 // bmc: need to do a loop here to display volume as requested
 
-                $("#outputs").html("<br><h3>The Annular Capacity is <br>" +
-                        barrelsPerFoot + " bbl/ft, or " +
-                        feetPerBarrel + " ft/bbl, or <br>" +
-                        gallonsPerFoot + " gal/ft, or " +
-                        feetPerGallon + " ft/gal</h3>");
-
-                // bmc: reference just this user and his IC data
-                var thisUserAC = thisUserDatabase.child("AC");
-                console.log("the AC part for this user is : " + thisUserAC);
-
-                // bmc: create a set of data in firebase from the information inputs and outputs
-                thisUserAC.push({
-                    outsideDiam : outsideDiameter + " inches",
-                    innerDiam: insideDiameter + " inches",
-                    barrelsPerFoot: barrelsPerFoot + " bbl/ft",
-                    feetPerBarrel: feetPerBarrel + " ft/bbl",
-                    gallonsPerFoot: gallonsPerFoot + " gal/ft",
-                    feetPerGallon: feetPerGallon + " ft/gal"
-                });
-
-                // // bmc: put the information in the list of saved calculations
-
-                $("#savedCalcs > tbody").append(
-                        "<tr><td>" + outsideDiameter + " inches" +
-                        "</td><td>" + insideDiameter + " inches" +
-                        "</td><td>" + barrelsPerFoot + " bbl/ft" +
-                        "</td><td>" + feetPerBarrel + " ft/bbl" +
-                        "</td><td>" + gallonsPerFoot + " gal/ft" +
-                        "</td><td>" + feetPerGallon + " ft/gal" +
-                        "</td></tr>");
-                $("body").css("cursor", "default");
+                $("#outputs").html("<br><h3>The Annular Capacity is " +
+                        barrelsPerFoot + " bbl/ft" +
+                        feetPerBarrel + " ft/bbl" +
+                        gallonsPerFoot + " gal/ft, <br>" +
+                        feetPerGallon + " ft/gal, <br></h3>");
             });
         });
 
@@ -170,32 +121,8 @@ function calculateAnnularVelocity () {
                 feetPerSec = response[0].feetPerSec;
 
                 $("#outputs").html("<br><h3>The Annular Velocity is <br>" +
-                        feetPerMin + " ft/min or<br>" +
-                        feetPerSec + " ft/sec</h3>");
-
-                // bmc: reference just this user and his IC data
-                var thisUserAV = thisUserDatabase.child("AV");
-                console.log("the AV part for this user is : " + thisUserAV);
-
-                // bmc: create a set of data in firebase from the information inputs and outputs
-                thisUserAV.push({
-                    smallDiam: smallDiam + " inches",
-                    bigDiam: bigDiam + " inches",
-                    barrelsPerMin: pumpOutput + " bbl/min",
-                    feetPerMin: feetPerMin + " ft/min",
-                    feetPerSec: feetPerSec + " ft/sec"
-                });
-
-                // // bmc: put the information in the list of saved calculations
-
-                $("#savedCalcs > tbody").append(
-                        "<tr><td>" + pumpOutput + " bbl/min" +
-                        "</td><td>" + bigDiam + " inches" +
-                        "</td><td>" + smallDiam + " inches" +
-                        "</td><td>" + feetPerMin + " ft/min" +
-                        "</td><td>" + feetPerSec + " ft/sec" +
-                        "</td></tr>");
-                $("body").css("cursor", "default");
+                        feetPerMin + " ft/min and <br>" +
+                        feetPerSec + " ft/sec <br></h3>");
             });
         });
 
@@ -235,28 +162,6 @@ function calculateFormationIntegrityTest() {
 
             $("#outputs").html("<br><h3>The pressure required is <br>" +
                     presRequired + " psi</h3>");
-
-            // bmc: reference just this user and his IC data
-            var thisUserFIT = thisUserDatabase.child("FIT");
-            console.log("the FIT part for this user is : " + thisUserFIT);
-
-            // bmc: create a set of data in firebase from the information inputs and outputs
-            thisUserFIT.push({
-                fitRequired: fitRequired + " ppg",
-                mudWeight: mudWeight + " ppg",
-                shoeDepth: shoeDepth + " feet",
-                gallonsPerFoot: presRequired + " psi"
-            });
-
-            // // bmc: put the information in the list of saved calculations
-
-            $("#savedCalcs > tbody").append(
-                    "<tr><td>" + fitRequired + " ppg" +
-                    "</td><td>" + mudWeight + " ppg" +
-                    "</td><td>" + shoeDepth + " feet" +
-                    "</td><td>" + presRequired + " psi" +
-                    "</td></tr>");
-            $("body").css("cursor", "default");
         });
     });
 }
@@ -267,8 +172,8 @@ function calculateFormationTemperature() {
     var tempGrad = $("#tempGrad").val();
     var formDepth = $("#formDepth").val();
     var formTemp = ""; // answer
-    var formulaName = "formationTemperature"; // bmc: to pass the inputs
-    var sheetName = "formTemp"; // bmc: to get the results
+    var formulaName = "formationIntegrityTest"; // bmc: to pass the inputs
+    var sheetName = "FIT"; // bmc: to get the results
 
     var queryGiveURL = "https://sheetsu.com/apis/v1.0/5b28081fedac/formula/" + formulaName; // bmc: to pass inputs
 
@@ -293,28 +198,6 @@ function calculateFormationTemperature() {
 
             $("#outputs").html("<br><h3>The formation temperature is <br>" +
                     formTemp + " degrees F</h3>");
-
-            // bmc: reference just this user and his IC data
-            var thisUserFT = thisUserDatabase.child("FT");
-            console.log("the FT part for this user is : " + thisUserFT);
-
-            // bmc: create a set of data in firebase from the information inputs and outputs
-            thisUserFT.push({
-                surfTemp: surfTemp + " degrees F",
-                tempGrad: tempGrad + " degrees F",
-                formDepth: formDepth + " feet",
-                formTemp: formTemp + " degrees F"
-            });
-
-            // // bmc: put the information in the list of saved calculations
-
-            $("#savedCalcs > tbody").append(
-                    "<tr><td>" + surfTemp + " degrees F" +
-                    "</td><td>" + tempGrad + " degrees F" +
-                    "</td><td>" + formDepth + " feet" +
-                    "</td><td>" + formTemp + " degrees F" +
-                    "</td></tr>");
-            $("body").css("cursor", "default");
         });
     });
 }
@@ -350,26 +233,6 @@ function calculateHydrostaticPressure() {
 
             $("#outputs").html("<br><h3>The hydrostatic pressure is <br>" +
                     hydroPres + "psi</h3>");
-
-            // bmc: reference just this user and his IC data
-            var thisUserHP = thisUserDatabase.child("HP");
-            console.log("the HP part for this user is : " + thisUserHP);
-
-            // bmc: create a set of data in firebase from the information inputs and outputs
-            thisUserHP.push({
-                mudWeight: mudWeight + " ppg",
-                verticalDepth: verticalDepthHP + " feet",
-                hydroPres: hydroPres + " psi"
-            });
-
-            // // bmc: put the information in the list of saved calculations
-
-            $("#savedCalcs > tbody").append(
-                    "<tr><td>" + mudWeight + " ppg" +
-                    "</td><td>" + verticalDepthHP + " feet" +
-                    "</td><td>" + hydroPres + " psi" +
-                    "</td></tr>");
-            $("body").css("cursor", "default");
         });
     });
 }
@@ -405,30 +268,8 @@ function calculateLeakOffTest() {
 
             lotEquivMudWeight = response[0].lotEquivMudWeight;
 
-            $("#outputs").html("<br><h3>The LOT equivalent mud weight is " +
-                    lotEquivMudWeight + " ppg</h3>");
-
-            // bmc: reference just this user and his IC data
-            var thisUserLOT = thisUserDatabase.child("LOT");
-            console.log("the LOT part for this user is : " + thisUserLOT);
-
-            // bmc: create a set of data in firebase from the information inputs and outputs
-            thisUserLOT.push({
-                lotPressure: lotPressure + " psi",
-                mudWeight: mudWeightLOT + " ppg",
-                shoeDepth: shoeDepthLOT + " feet",
-                lotEquivMudWeight: lotEquivMudWeight + " ppg"
-            });
-
-            // // bmc: put the information in the list of saved calculations
-
-            $("#savedCalcs > tbody").append(
-                    "<tr><td>" + lotPressure + " psi" +
-                    "</td><td>" + mudWeightLOT + " ppg" +
-                    "</td><td>" + shoeDepthLOT + " feet" +
-                    "</td><td>" + lotEquivMudWeight + " ppg" +
-                    "</td></tr>");
-            $("body").css("cursor", "default");
+            $("#outputs").html("<br><h3>The LOT equivalent mud weight is <br>" +
+                    lotEquivMudWeight + "ppg</h3>");
         });
     });
 }
@@ -462,24 +303,6 @@ function calculatePressureGradient() {
 
             $("#outputs").html("<br><h3 class='result'>The pressure gradient is <br>" +
                     presGrad + " psi/ft</h3>");
-
-            // bmc: reference just this user and his IC data
-            var thisUserPG = thisUserDatabase.child("PG");
-            console.log("the PG part for this user is : " + thisUserPG);
-
-            // bmc: create a set of data in firebase from the information inputs and outputs
-            thisUserPG.push({
-                mudWeight: mudWeightPG + " ppg",
-                presGrad: presGrad + " psi/ft"
-            });
-
-            // // bmc: put the information in the list of saved calculations
-
-            $("#savedCalcs > tbody").append(
-                    "<tr><td>" + mudWeightPG + " ppg" +
-                    "</td><td>" + presGrad + " psi/ft" +
-                    "</td></tr>");
-            $("body").css("cursor", "default");
         });
     });
 }
@@ -522,38 +345,15 @@ function calculateSlugCalculation() {
             lengthOfSludInDP = response[0].lengthOfSludInDP;
             slugVolume = response[0].slugVolume;
 
-            $("#outputs").html("<br><h3>The pressure required is " +
-                    hydroPresReq + " psi<br>The pressure gradient difference is " + presGradDif + "psi/ft<br>The length of slug is " + lengthOfSludInDP + "feet<br>The slug volume is " + slugVolume + "bbl</h3>");
-
-            // bmc: reference just this user and his IC data
-            var thisUserSC = thisUserDatabase.child("SC");
-            console.log("the SC part for this user is : " + thisUserSC);
-
-            // bmc: create a set of data in firebase from the information inputs and outputs
-            thisUserSC.push({
-                pipeLength: pipeLength + " feet",
-                dpCapacity: dpCapacity + " bbl/ft",
-                currentMudWeight: currentMudWeight + " ppg",
-                slugWeight: slugWeight + " ppg",
-                hydroPresReq: hydroPresReq + " psi",
-                presGradDif: presGradDif + " psi/ft",
-                lengthOfSludInDP: lengthOfSludInDP + " feet",
-                slugVolume: slugVolume + " bbl"
-            });
-
-            // // bmc: put the information in the list of saved calculations
-
-            $("#savedCalcs > tbody").append(
-                    "<tr><td>" + pipeLength + " feet" +
-                    "</td><td>" + dpCapacity + " bbl/ft" +
-                    "</td><td>" + currentMudWeight + " ppg" +
-                    "</td><td>" + slugWeight + " ppg" +
-                    "</td><td>" + hydroPresReq + " psi" +
-                    "</td><td>" + presGradDif + " psi/ft" +
-                    "</td><td>" + lengthOfSludInDP + " feet" +
-                    "</td><td>" + slugVolume + " bbl" +
-                    "</td></tr>");
-            $("body").css("cursor", "default");
+            $("#outputs").html("<br><h3>The results of your slug calculations are as follows:<br>The hydrostatic pressure required to give desired drop inside drill pipe is " +
+                    hydroPresReq + " psi<br>The difference in pressure gradient between slug and current mud weight is " + presGradDif + "psi/ft<br>The ength of slug in drill pipe is " + lengthOfSludInDP + "feet<br>And the slug volume is " + slugVolume + "bbl</h3>");
         });
     });
 }
+
+
+
+
+
+
+
