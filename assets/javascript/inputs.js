@@ -201,6 +201,7 @@ $(document).on('click', '#AnnV', function () {
             calculateAnnularVelocity();
             $("#outputs").html("<br><h3>Standby as we caclulate Annular Velocity...</h3>");
             console.log("we're attempting to calculate velocity")
+            $("body").css("cursor", "progress");
         }
         else {
             $("#outputs").html("<br><h3>Please enter only positive numbers and make sure the Large Diam is larger than the Small Diam.</h3>");
