@@ -10,7 +10,7 @@ Our team is Taylor Feinstein, Lonnie White, Rochelle Beal and Bon Crowder. If yo
 
 ## Deployment
 
-The Oilfield Calculations application is fully functional online at [bit.ly/oil-calc](http://bit.ly/oil-calc). 
+The Oilfield Calculations application is fully functional online at [http://mth4.co/oilfield-calc](http://mth4.co/oilfield-calc).
 
 ## Tools Used
 
@@ -21,8 +21,7 @@ The Oilfield Calculations application is fully functional online at [bit.ly/oil-
 
 ## Contributing
 
-If you'd like to contribute, shoot us an email or text at mathfour.com@gmail.com or 713-557-8048. We'll post coont
-Please read [CONTRIBUTING.md](Oilfield-Calculations/CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
+If you'd like to contribute, shoot us an email or text at mathfour.com@gmail.com or 713-557-8048. Please read [CONTRIBUTING.md](Oilfield-Calculations/CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
 
 ## Code Manangement
 
