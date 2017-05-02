@@ -4,6 +4,10 @@
 
 Calculations are based on the formulas from [DrillingFormulas.com](http://www.drillingformulas.com/) and the app is fully functional. There are currently 9 options for calculations.
 
+## Screenshots
+
+![Screenshot of Oilfield Calculations UI](images/OilfieldCalculations.png "Oilfield Calculations at work!")
+
 ## Contributors
 
 Our team formed mid-April 2017 as Tomagocha. We are students of [The Houston Coding Bootcamp Powered by UT Austin](https://houston.codingbootcamp.utexas.edu/).
@@ -16,8 +20,12 @@ Our team is Taylor Feinstein, Lonnie White, Rochelle Beal and Bon Crowder. If yo
 
 The Oilfield Calculations application is fully functional online at [http://mth4.co/oilfield-calc](http://mth4.co/oilfield-calc).
 
-## Tools Used
+## Tools & Technologies Used
 
+* HTML/CSS
+* Javascript
+* [Firebase](https://firebase.google.com/)
+* [jQuery](http://jquery.com/)
 * [Bootstrap](http://getbootstrap.com/) - The web framework used
 * [Google Sheets](https://www.google.com/sheets/about/) - To house the calculations
 * [Sheetsu](https://sheetsu.com/) - API bridge to/from Google Sheets
